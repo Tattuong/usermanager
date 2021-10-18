@@ -1,30 +1,16 @@
-// const myInit = {
-//   mothod:'GET',
-//   Headers:{
-//       'Content-Type': 'application/json' 
-//   },
-//   mode:'cors',
-//   cache:'default'
-// };
 
-// const myRequest = new Request("./db.json", myInit)
+// const path = require('path')
 
-// fetch(myRequest)
-// .then(function(resp){
-//   return resp.json()
-// })
-// .then(function(data){
-//   console.log(data.users);
-// })
+// const data = fs.readFileSync(path.resolve(__dirname, 'db.json'));
+// const db = JSON.parse(data);
 
-
-
-const myList = document.querySelector('ul');
-const myRequest = new Request('db.json');
-
-fetch(myRequest)
-  .then(response => response.json())
-  .then(data => {
-  
-  })
-  .catch(console.error);
+// console.log(db);
+// const requestListener = function (req, res) {
+//     res.setHeader("Content-Type", "application/json");
+//     switch (req.url) {
+//         case "./api/products":
+//             res.writeHead(200);
+//             res.end(products);
+//             break
+//     }
+// }

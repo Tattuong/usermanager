@@ -1,5 +1,4 @@
-{
-  "users": [
+ [
     {
       "name": "tuong1231",
       "email": "tattuong17@gmail.com",
@@ -62,6 +61,12 @@
       "address": "erer",
       "phone": "er",
       "id": 8
+    },
+    {
+      "name": "tuong1244",
+      "email": "tattuong17@gmail.com",
+      "address": "erer",
+      "phone": "er",
+      "id": 8
     }
   ]
-}

@@ -1,5 +1,5 @@
 // render users
-const url = "http://localhost:3000/users";
+const url = "http://localhost:3000/api/products";
 
 const addModalForm = document.querySelector(".form-user");
 const editModalForm = document.querySelector("#editModal .form-user");
@@ -35,6 +35,7 @@ const checkAllUsers = () => {
   }
 };
 //deleteUserCheckbox
+
 
 const deleteAllUsers = () => {
   console.log(listSelectedUser);
@@ -81,11 +82,8 @@ const renderUsers = (user) => {
 						</td>
 					</tr>       
 	`;
-  
   tableUsers.insertAdjacentHTML("beforeend", output);
 
-
-  
   const btnDel = document.querySelector(`[data-id = '${user.id}'] .btn-del`);
   btnDel.addEventListener("click", (e) => {
     e.preventDefault();

@@ -1,52 +1,35 @@
-const http = require('http');
-const fs = require('fs');
+const express = require("express");
+const mongoose = require("mongoose");
+const path = require("path");
+const app = express();
+const bodyParser = require("body-parser");
 
+const apiRouter = require("./routes/auth");
 
-
-const server = http.createServer (function(req, res) {
-    res.writeHead(200, {
-        'Content-Type': 'text/html'
+const connectDb = async () => {
+  try {
+    await mongoose.connect("mongodb://localhost:27017/usermanagement", {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
     });
-    fs.readFile('./index.html', null, function (error, data) {
-        if (error) {
-            res.writeHead(404);
-            res.write('not found');
-        } else {
-            res.write(data);
-        }
-        res.end();
-    });
-});
+    console.log("MongoDB connected");
+  } catch (error) {
+    console.log(error.message);
+    process.exit(1);
+  }
+};
+connectDb();
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.static(path.join(__dirname, "public")));
 
 
+//set view engine
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
 
-const port = 3000
-server.listen(port, function(error){
-    if(error){
-        console.log('connected wrong', error);
-    }
-    else{
-    console.log('server is listening on port', port);
-    }
-})
+app.use("/", apiRouter);
 
-// const http = require('http')
-// const hostname = '127.0.0.1'
-// const port = 3000
-// const server = http.createServer((req, res) => {
-//     res.writeHead(200, {
-//         'Content-Type': 'text/html'
-//     });
-//     fs.readFile('./index.html', null, function (error, data) {
-//         if (error) {
-//             res.writeHead(404);
-//             res.write('not found');
-//         } else {
-//             res.write(data);
-//         }
-//         res.end();
-//     });
-// });
-// server.listen(port, hostname, () => {
-// console.log(`Server running at http://${hostname}:${port}/`)
-// })
+const PORT = 3002;
+app.listen(PORT, () => console.log(`server started on port ${PORT}`));
